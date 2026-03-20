@@ -60,20 +60,20 @@ class TestBuildFrame(unittest.TestCase):
     """Test static frame composition."""
 
     def test_frame_has_border(self):
-        frame = _build_frame(100, 30, "classic")
+        frame = _build_frame(100)
         self.assertTrue(frame[0].startswith("╔"))
         self.assertTrue(frame[0].endswith("╗"))
         self.assertTrue(frame[-1].startswith("╚"))
         self.assertTrue(frame[-1].endswith("╝"))
 
     def test_frame_consistent_width(self):
-        frame = _build_frame(100, 30, "classic")
+        frame = _build_frame(100)
         expected_width = 100  # cols
         for i, line in enumerate(frame):
             self.assertEqual(len(line), expected_width, f"Line {i} width mismatch")
 
     def test_frame_contains_subtitle(self):
-        frame = _build_frame(100, 30, "classic")
+        frame = _build_frame(100)
         combined = "\n".join(frame)
         self.assertIn("blessed Eid", combined)
 

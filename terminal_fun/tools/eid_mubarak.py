@@ -73,7 +73,7 @@ def get_figlet_text(text: str, max_width: int) -> list[str]:
 # Build the complete static frame (list of strings)
 # ---------------------------------------------------------------------------
 
-def _build_frame(cols: int, rows: int, theme_name: str) -> list[str]:
+def _build_frame(cols: int) -> list[str]:
     """Compose the full greeting frame as a list of strings."""
     inner_width = cols - 2  # inside the border ║...║
 
@@ -212,7 +212,7 @@ def _init_colors(theme: dict[str, tuple[int, int, int]]) -> dict[str, int]:
             "star": (19, (200, 200, 200)),
             "star_dim": (20, (100, 100, 100)),
         }
-        for name, (idx, rgb) in color_defs.items():
+        for _, (idx, rgb) in color_defs.items():
             cr, cg, cb = _rgb_to_curses_color(*rgb)
             try:
                 curses.init_color(idx, cr, cg, cb)
@@ -331,7 +331,7 @@ def _animate(stdscr: Any, theme_name: str) -> None:
     # -----------------------------------------------------------------------
     # Phase 1: Twinkling stars (30 frames)
     # -----------------------------------------------------------------------
-    for frame_num in range(30):
+    for _ in range(30):
         stdscr.erase()
         for sy, sx in stars:
             brightness = random.random()
